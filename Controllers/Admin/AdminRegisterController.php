@@ -62,8 +62,9 @@ class AdminRegisterController extends BaseController
 
 		$rowUser = $this->memberModel->getUserEmail($data['email']);
 		if ($rowUser) {
-			$hash_pass = $rowUser->password;
-			if (password_verify($data['password'], $hash_pass)) {
+			$hash_pass = $rowUser['password'];
+			$hash_user_pass = $this->memberModel->encodePass($data['password']);
+			if ($hash_pass == $hash_user_pass) {
 				echo 'success';
 			}else {
 				echo 'fail';

@@ -38,8 +38,8 @@ class MemberModel extends BaseModel
 	public function getUserEmail($email)
 	{
 		$sql = "SELECT * FROM member WHERE email='$email'";
-		$row = $this->mysqli->query($sql);
-
+		$result = $this->mysqli->query($sql);
+		$row = $result->fetch_assoc();
 		if (empty($row)) {
 			return false;
 		}else {
