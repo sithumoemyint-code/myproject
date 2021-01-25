@@ -7,6 +7,7 @@ require 'init.php';
 use Controllers\Admin\AdminHomeController;
 use Controllers\Admin\AdminRegisterController;
 use Controllers\HomeController;
+use Middlewares\AuthCheck;
 
 $action = isset($_GET['action'])? $_GET['action'] : '';
 $method = isset($_GET['method'])? $_GET['method'] : '';
@@ -20,7 +21,7 @@ switch ($action) {
 
 	case 'admin':
 		if ($method == '') {
-			(new AdminHomeController())->index();
+			new AuthCheck(new AdminHomeController(), 'index');
 		}else if ($method == 'adminRegisterLogin') {
 			if ($method1 == 'login') {
 				(new AdminRegisterController)->login();
