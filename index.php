@@ -8,12 +8,6 @@ use Controllers\Admin\AdminHomeController;
 use Controllers\Admin\AdminRegisterController;
 use Controllers\HomeController;
 
-
-$adminHomeController = new AdminHomeController();
-$adminRegisterController = new AdminRegisterController();
-$homeController = new HomeController();
-
-
 $action = isset($_GET['action'])? $_GET['action'] : '';
 $method = isset($_GET['method'])? $_GET['method'] : '';
 $method1 = isset($_GET['method1'])? $_GET['method1'] : '';
@@ -26,18 +20,18 @@ switch ($action) {
 
 	case 'admin':
 		if ($method == '') {
-			$adminHomeController->index();
+			(new AdminHomeController())->index();
 		}else if ($method == 'adminRegisterLogin') {
 			if ($method1 == 'login') {
-				$adminRegisterController->login();
+				(new AdminRegisterController)->login();
 			}else if ($method1 == 'register') {
-				$adminRegisterController->register();
+				(new AdminRegisterController)->register();
 			}else if ($method1 == 'registerInsert') {
-				$adminRegisterController->regInsert();
+				(new AdminRegisterController)->regInsert();
 			}else if ($method1 == 'loginMember') {
-				$adminRegisterController->loginMember();
+				(new AdminRegisterController)->loginMember();
 			}else if ($method1 == 'logout') {
-				$adminRegisterController->logout();
+				(new AdminRegisterController)->logout();
 			}else{
 				echo '404 not found';
 			}	

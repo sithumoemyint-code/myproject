@@ -3,11 +3,11 @@ namespace Middlewares;
 
 use Sysgem\Session;
 
-class AuthCheck {
+trait AuthCheck {
     
-    public static function check(){
+    public function check(){
         if( Session::has('login_user') == false ){
-            header('location: admin/adminRegisterLogin/login');
+            header('location: '.$this->baseurl.'/admin/adminRegisterLogin/login');
         }
     }
 }
