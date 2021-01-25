@@ -1,0 +1,39 @@
+body
+{
+	background: #F0F2F5;
+}
+
+.test
+{
+	color: green;
+}
+
+.fa-chevron-circle-down
+{
+	font-size: 26px;
+	color: #6c757d;
+	cursor: pointer;
+}
+
+.fa-chevron-circle-down:hover
+{
+	color: #adb5bd;
+	transition-duration: .4s;
+}
+
+.loginContainer
+{
+	background: #FFFFFF;
+}
+
+.navContainer
+{
+	background-color: #FFFFFF;
+}
+
+.english
+{
+	font-family: 'Potta One', cursive;
+	font-size: 24px;
+	font-weight: bolder;
+}
