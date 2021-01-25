@@ -3,7 +3,8 @@
 		"psr-4": {
 			"Controllers\\":"Controllers/",
 			"Models\\":"Models/",
-			"Sysgem\\":"Sysgem/"
+			"Sysgem\\":"Sysgem/",
+			"Middlewares\\":"Middlewares/"
 		}
 	},
 	"require": {

@@ -19,11 +19,11 @@
 							<i class="fas fa-chevron-circle-down"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/MyProject5/admin/adminRegisterLogin/logout">Logout</a>
+								<a class="dropdown-item" href="{{ $baseurl }}/admin/adminRegisterLogin/logout">Logout</a>
 
 							
-								<a class="dropdown-item" href="/MyProject5/admin/adminRegisterLogin/register">Register</a>
-								<a class="dropdown-item" href="/MyProject5/admin/adminRegisterLogin/login">Login</a>
+								<a class="dropdown-item" href="{{ $baseurl }}/adminRegisterLogin/register">Register</a>
+								<a class="dropdown-item" href="{{ $baseurl }}/adminRegisterLogin/login">Login</a>
 							
 						</div>
 					</li>

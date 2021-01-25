@@ -4,7 +4,8 @@ namespace Controllers\Admin;
 
 use Controllers\BaseController;
 use Models\MemberModel;
-
+use Sysgem\Session;
+use Middlewares\AuthCheck;
 
 class AdminHomeController extends BaseController
 {
@@ -17,10 +18,8 @@ class AdminHomeController extends BaseController
 
 	public function index()
 	{
-		// $obj = $this->memberModel->getTable();
-		// $member = json_decode(json_encode($obj));
-
-		// setUserSession($member);
+		AuthCheck::check();
+		$login_user = Session::get('login_user');
 		$this->renderBlade('admin.index');
 	}
 

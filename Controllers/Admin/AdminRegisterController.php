@@ -65,7 +65,8 @@ class AdminRegisterController extends BaseController
 			$hash_pass = $rowUser['password'];
 			$hash_user_pass = $this->memberModel->encodePass($data['password']);
 			if ($hash_pass == $hash_user_pass) {
-				echo 'success';
+				Session::add('login_user', $rowUser);
+				header('location: ' . $this->baseurl . '/admin');	
 			}else {
 				echo 'fail';
 			}
@@ -82,6 +83,7 @@ class AdminRegisterController extends BaseController
 
 	public function logout()
 	{
-		
+		Session::remove('login_user');
+		header('location: ' . $this->baseurl . '/admin/adminRegisterLogin/login');
 	}
 }
