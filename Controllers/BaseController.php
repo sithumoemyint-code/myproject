@@ -6,6 +6,8 @@ use Jenssegers\Blade\Blade;
 
 class BaseController
 {
+	use \Middlewares\AuthCheck, \Middlewares\AdminAuthCheck;
+
 	protected $baseurl = '/kosithuOop';
 
 	public function renderBlade($blade_file, $data = [])

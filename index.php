@@ -30,13 +30,13 @@ switch ($action) {
 
 	case 'admin':
 		if ($method == '') {
-			$adminHomeController->index();
+			$adminHomeController->checkLogin()->index();
 		}else if ($method == 'cat-list') {
-			$adminHomeController->catList();
+			$adminHomeController->checkLogin()->catList();
 		}else if ($method == 'cat-new'){
-			$adminHomeController->catNew();
+			$adminHomeController->checkLogin()->catNew();
 		}else if ($method == 'cat-new') {
-			$adminPostController->cat_new();
+			$adminPostController->checkLogin()->cat_new();
 		}else if ($method == 'login') {
 			$adminRegisterController->login();
 		}else if ($method == 'register') {
@@ -46,11 +46,11 @@ switch ($action) {
 		}else if ($method == 'loginMember') {
 			$adminRegisterController->loginMember();
 		}else if ($method == 'logout') {
-			$adminRegisterController->logout();
+			$adminRegisterController->checkLogin()->logout();
 		}else if ($method == 'cat-add') {
-			$adminPostController->cat_add();
+			$adminPostController->checkLogin()->cat_add();
 		}else if ($method == 'cat-del') {
-			$adminPostController->cat_del($id);
+			$adminPostController->checkLogin()->checkAdmin()->cat_del($id);
 		}else{
 			echo '404 not found';
 		}
