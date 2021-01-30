@@ -1,6 +1,25 @@
-RewriteEngine On
-RewriteBase /kosithuOop
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
 
-RewriteRule ^([a-zA-Z0-9-_]+)/?$ index.php?action=$1
-RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?action=$1&method=$2
-RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?action=$1&method=$2&method1=$3
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    RewriteRule ^([a-zA-Z0-9-_]+)/?$ index.php?action=$1 [QSA]
+    RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?action=$1&method=$2 [QSA]
+    RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?action=$1&method=$2&method1=$3 [QSA]
+
+</IfModule>

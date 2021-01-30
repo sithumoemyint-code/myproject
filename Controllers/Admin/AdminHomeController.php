@@ -5,7 +5,7 @@ namespace Controllers\Admin;
 use Controllers\BaseController;
 use Models\CategoryModel;
 use Sysgem\Session;
-use Middleware\AuthCheck;
+use Middlewares\AuthCheck;
 
 
 class AdminHomeController extends BaseController

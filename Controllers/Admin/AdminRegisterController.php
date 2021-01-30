@@ -5,6 +5,7 @@ namespace Controllers\Admin;
 use Controllers\BaseController;
 use Models\MemberModel;
 use Sysgem\Session;
+use Helper\Validation;
 
 class AdminRegisterController extends BaseController
 {
@@ -57,6 +58,19 @@ class AdminRegisterController extends BaseController
 			'password' => $_POST['password']
 		];
 
+		$rules = [
+			'email' => 'required|email|email_exist',
+			'password' => 'required|minlength=10'
+		];
+		$validate = new Validation($rules, $data);
+		echo '<pre>';
+		print_r($validate);
+		exit;
+
+		if($validate->hasError()){
+			Session::add('errors', $validate->getError());
+		}
+
 		$obj = $this->memberModel->getUserEmail($data['email']);
 		$rowUser = json_decode(json_encode($obj));
 
@@ -81,6 +95,7 @@ class AdminRegisterController extends BaseController
 	public function logout()
 	{
 		Session::remove('user_id');
+		Session::remove('user_name');
 		header('location: ' . $this->baseurl . '/admin/login');
 	}
 }
