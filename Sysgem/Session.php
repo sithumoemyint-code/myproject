@@ -18,6 +18,17 @@ class Session
 		return isset($_SESSION[$key]) ? true : false;
 	}
 
+	public static function getAndRemove($key)
+	{
+		if (self::has($key)) {
+			$val = $_SESSION[$key];
+			unset($_SESSION[$key]);
+			return $val;
+		}else {
+			return null;
+		}	
+	}
+
 	public static function remove($key)
 	{
 		if (self::has($key)) {

@@ -2,6 +2,8 @@
 
 namespace Helper;
 
+use Models\MemberModel;
+
 class Validation {
     
     private $error = false;
@@ -17,7 +19,9 @@ class Validation {
             echo '<br>';
             
             $rulesArr = explode('|', $rules[$key]);
+
             echo '<pre>'; var_dump($rulesArr); echo '</pre>'; 
+
             foreach ($rulesArr as $rule) {
                 if($rule == 'required'){
                     $this->requiredCheck($key, $value);
@@ -25,21 +29,55 @@ class Validation {
                 if($rule == 'email'){
                     $this->emailCheck($key, $value);
                 }
+                if(strpos($rule, 'email_exist') !== false){
+                    $this->emailExist($key, $value, $rule);
+                }
+                if(strpos($rule, 'minlength') !== false){
+                    $this->minlengthCheck($key, $value, $rule);
+                }                
+                if(strpos($rule, 'confirm_password') !== false){
+                    $this->pwconfirmCheck($key, $value, $rule);
+                }
             }
+        }
+    }
+
+    private function pwconfirmCheck($key, $value, $rule){
+        $confirmpw = explode('=', $rule)[1];
+        if($value != $confirmpw){
+            $this->error = true;
+            array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' should equal with confirm password']);
+        }
+    }
+
+    private function minlengthCheck($key, $value, $rule) {
+        $minlen = explode('=', $rule)[1];
+        if ( strlen($value) <= $minlen ){
+            $this->error = true;
+            array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' should be greater than '.$minlen]);
+        }        
+    }
+
+    private function emailExist($key, $value, $rule){
+        $tablename = explode('=', $rule)[1];
+        $res = (new MemberModel())->getUserEmail($value);
+        if($res != false){
+            $this->error = true;
+            array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' is already exist']);
         }
     }
 
     private function emailCheck($key, $value){
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $this->error = true;
-            $this->errorArr = $this->errorArr + ['key' => $key, 'message' => $key . ' is invalid email'];
+            array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' is invalid email']);
         }
     }
 
     private function requiredCheck($key, $value){
         if( empty($value) ){
             $this->error = true;
-            $this->errorArr = $this->errorArr + ['key' => $key, 'message' => $key . ' is required'];
+            array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' is required']);
         }
     }
 

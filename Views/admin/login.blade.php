@@ -24,6 +24,11 @@
 
 		<h2 class="english1 text-center mb-3">Login User</h2>
 
+		@if(\Sysgem\Session::has('errors'))
+			@foreach(\Sysgem\Session::getAndRemove('errors') as $value)
+				<p>{{ $value['message'] }}</p>
+			@endforeach			
+		@endif
 		
 		<form class="form" action="loginMember" method="post">
 			<div class="form-group">

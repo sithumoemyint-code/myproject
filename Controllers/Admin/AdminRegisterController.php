@@ -28,11 +28,30 @@ class AdminRegisterController extends BaseController
 
 
 	public function regInsert()
-	{
+	{		
 		$name = $_POST['username'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$confirm_password = $_POST['confirm_password'];
+
+		$data = [
+			'email' => $_POST['email'],
+			'username' => $_POST['username'],
+			'password' => $_POST['password'],			
+		];
+
+		$rules = [
+			'email' => 'required|email|email_exist=members',
+			'password' => 'required|minlength=6|confirm_password='.$_POST['confirm_password'],
+			'username' => 'required|minlength=6'
+		];
+		$validate = new Validation($rules, $data);
+		
+		if($validate->hasError()){
+			Session::flash('errors', $validate->getError());
+			header('location: ' . $this->baseurl . '/admin/register');
+			exit;
+		}
 
 		if ($password === $confirm_password) {
 			$result = $this->memberModel->insert($name, $email, $password);
@@ -59,16 +78,14 @@ class AdminRegisterController extends BaseController
 		];
 
 		$rules = [
-			'email' => 'required|email|email_exist',
-			'password' => 'required|minlength=10'
+			'email' => 'required|email',
+			'password' => 'required|minlength=6'
 		];
 		$validate = new Validation($rules, $data);
-		echo '<pre>';
-		print_r($validate);
-		exit;
-
+		
 		if($validate->hasError()){
-			Session::add('errors', $validate->getError());
+			Session::flash('errors', $validate->getError());
+			header('location: ' . $this->baseurl . '/admin/login');			
 		}
 
 		$obj = $this->memberModel->getUserEmail($data['email']);

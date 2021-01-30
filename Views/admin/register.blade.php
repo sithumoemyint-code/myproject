@@ -18,20 +18,37 @@
 
 		<h2 class="english1 text-center mb-3">Register User</h2>
 
+		@php 
+			$oldValues = [];
+		@endphp
+		@if(\Sysgem\Session::has('errors'))
+			@php
+				$errors = \Sysgem\Session::getAndRemove('errors');				
+			@endphp
+			@foreach($errors as $value)
+				<p>{{ $value['message'] }}</p>
+
+				@php
+					$oldValues[$value['key']] = $value['value'];
+				@endphp
+			@endforeach			
+		@endif
+
+
 		<form class="form" action="registerInsert" method="post">
 			<div class="form-group">
 				<label for="username">Username</label>
-				<input type="text" class="form-control rounded-0" name="username" id="username">
+				<input type="text" value="{{  isset($oldValues['username'])? $oldValues['username'] : '' }}" class="form-control rounded-0" name="username" id="username">
 			</div>
 
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input type="email" class="form-control rounded-0" name="email" id="email">
+				<input type="email" value="{{  isset($oldValues['email'])? $oldValues['email'] : '' }}" class="form-control rounded-0" name="email" id="email">
 			</div>
 
 			<div class="form-group">
 				<label for="password">Password</label>
-				<input type="password" class="form-control rounded-0" name="password" id="password">
+				<input type="password" value="{{  isset($oldValues['password'])? $oldValues['password'] : '' }}"class="form-control rounded-0" name="password" id="password">
 			</div>
 
 			<div class="form-group">
