@@ -11,16 +11,16 @@ class Validation {
 
     public function __construct($rules, $data){
         foreach ($data as $key => $value) {
-            echo $key; 
-            echo ' = '; 
-            echo $value; 
-            echo ' need to check '; 
-            echo $rules[$key];
-            echo '<br>';
+            // echo $key; 
+            // echo ' = '; 
+            // echo $value; 
+            // echo ' need to check '; 
+            // echo $rules[$key];
+            // echo '<br>';
             
             $rulesArr = explode('|', $rules[$key]);
 
-            echo '<pre>'; var_dump($rulesArr); echo '</pre>'; 
+            // echo '<pre>'; var_dump($rulesArr); echo '</pre>'; 
 
             foreach ($rulesArr as $rule) {
                 if($rule == 'required'){
