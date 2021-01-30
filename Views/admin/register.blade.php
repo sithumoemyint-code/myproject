@@ -16,7 +16,7 @@
 		@endif
 
 
-		<h1 class="text-danger text-center mb-3">Register User</h1>
+		<h2 class="english1 text-center mb-3">Register User</h2>
 
 		<form class="form" action="registerInsert" method="post">
 			<div class="form-group">

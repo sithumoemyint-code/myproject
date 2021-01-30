@@ -38,52 +38,49 @@ class AdminRegisterController extends BaseController
 
 			if ($result === true) {
 				Session::flash('register_success', 'Register Successfull. How do you do, Admin.');
-				header('location: ' . $this->baseurl . '/admin/adminRegisterLogin/login');
+				header('location: ' . $this->baseurl . '/admin/login');
 			}else {
 				Session::flash('email_exist', 'Email already in use');
-				header('location: ' . $this->baseurl . '/admin/adminRegisterLogin/register');
+				header('location: ' . $this->baseurl . '/admin/register');
 			}	
 		}else {
 			Session::flash("error_message", "Password do not match. Please check your password.");
-			header('location: ' . $this->baseurl . '/admin/adminRegisterLogin/register');
+			header('location: ' . $this->baseurl . '/admin/register');
 		}
 	}
 
 	public function loginMember()
 	{
-		// $email = $_POST['email'];
-		// $password = $_POST['password'];
-		// $result = $this->memberModel->login($email, $password);
 		 
 		$data = [
 			'email' => $_POST['email'],
 			'password' => $_POST['password']
 		];
 
-		$rowUser = $this->memberModel->getUserEmail($data['email']);
+		$obj = $this->memberModel->getUserEmail($data['email']);
+		$rowUser = json_decode(json_encode($obj));
+
 		if ($rowUser) {
-			$hash_pass = $rowUser['password'];
+			$hash_pass = $rowUser->password;
 			$hash_user_pass = $this->memberModel->encodePass($data['password']);
-			if ($hash_pass == $hash_user_pass) {
-				Session::add('login_user', $rowUser);
-				header('location: ' . $this->baseurl . '/admin');	
+			if ($hash_user_pass == $hash_pass) {
+				Session::add("user_id", $rowUser->id);
+				Session::add("user_name", $rowUser->name);
+				header('location: ' . $this->baseurl . '/admin');
 			}else {
-				echo 'fail';
+				Session::flash("password_fail", "Wrong password. Please check your password.");
+				header('location: ' . $this->baseurl . '/admin/login');
 			}
 		}else {
-			Session::flash("error_message", "failfial");
-			header('location: ' . $this->baseurl . '/admin/adminRegisterLogin/login');
+			Session::flash("error_message", "Email fail. Please check your email.");
+			header('location: ' . $this->baseurl . '/admin/login');
 		}
 
-
-
-		// Session::flash("error_message", "Worng password.Please try it again.");
-		// header('location: ' . $this->baseurl . '/admin/adminRegisterLogin/login');
 	}
 
 	public function logout()
 	{
-		Session::remove('login_user');
-		header('location: ' . $this->baseurl . '/admin/adminRegisterLogin/login');
+		Session::remove('user_id');
+		header('location: ' . $this->baseurl . '/admin/login');
 	}
 }

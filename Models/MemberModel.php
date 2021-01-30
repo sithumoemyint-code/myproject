@@ -40,6 +40,7 @@ class MemberModel extends BaseModel
 		$sql = "SELECT * FROM member WHERE email='$email'";
 		$result = $this->mysqli->query($sql);
 		$row = $result->fetch_assoc();
+
 		if (empty($row)) {
 			return false;
 		}else {
@@ -47,17 +48,18 @@ class MemberModel extends BaseModel
 		}
 	}
 
-	public function login($email, $password)
-	{
-		$sql = "SELECT * FROM member WHERE email='$email' AND password='$password'";
-		$result = $this->mysqli->query($sql);
 
-		if (mysqli_num_rows($result) == 1) {
-			return true;
-		}else {
-			return false;
-		}
-	}
+	// public function login($email, $password)
+	// {
+	// 	$sql = "SELECT * FROM member WHERE email='$email' AND password='$password'";
+	// 	$result = $this->mysqli->query($sql);
+
+	// 	if (mysqli_num_rows($result) == 1) {
+	// 		return true;
+	// 	}else {
+	// 		return false;
+	// 	}
+	// }
 
 
 	public function encodePass($pass)

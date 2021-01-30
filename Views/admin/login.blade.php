@@ -17,8 +17,12 @@
 			{{\Sysgem\Session::flash('error_message')}}
 		@endif
 
+		@if(\Sysgem\Session::has('password_fail'))
+			{{\Sysgem\Session::flash('password_fail')}}
+		@endif
 
-		<h1 class="text-danger text-center mb-3">Login User</h1>
+
+		<h2 class="english1 text-center mb-3">Login User</h2>
 
 		
 		<form class="form" action="loginMember" method="post">
