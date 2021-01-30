@@ -85,7 +85,8 @@ class AdminRegisterController extends BaseController
 		
 		if($validate->hasError()){
 			Session::flash('errors', $validate->getError());
-			header('location: ' . $this->baseurl . '/admin/login');			
+			header('location: ' . $this->baseurl . '/admin/login');	
+			exit;		
 		}
 
 		$obj = $this->memberModel->getUserEmail($data['email']);
