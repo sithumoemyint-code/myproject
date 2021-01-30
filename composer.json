@@ -4,7 +4,8 @@
 			"Controllers\\":"Controllers/",
 			"Models\\":"Models/",
 			"Sysgem\\":"Sysgem/",
-			"Middlewares\\":"Middlewares/"
+			"Middlewares\\":"Middlewares/",
+			"Helper\\":"Helper/"
 		}
 	},
 	"require": {
