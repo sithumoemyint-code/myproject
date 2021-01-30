@@ -24,18 +24,18 @@ class Validation {
 
             foreach ($rulesArr as $rule) {
                 if($rule == 'required'){
-                    $this->requiredCheck($key, $value);
+                    $required = $this->requiredCheck($key, $value);
                 }
-                if($rule == 'email'){
-                    $this->emailCheck($key, $value);
+                if(!$required && $rule == 'email'){
+                    $emailValid = $this->emailCheck($key, $value);
                 }
-                if(strpos($rule, 'email_exist') !== false){
+                if($emailValid && strpos($rule, 'email_exist') !== false){
                     $this->emailExist($key, $value, $rule);
                 }
-                if(strpos($rule, 'minlength') !== false){
+                if(!$required && strpos($rule, 'minlength') !== false){
                     $this->minlengthCheck($key, $value, $rule);
                 }                
-                if(strpos($rule, 'confirm_password') !== false){
+                if(!$required && strpos($rule, 'confirm_password') !== false){
                     $this->pwconfirmCheck($key, $value, $rule);
                 }
             }
@@ -47,7 +47,9 @@ class Validation {
         if($value != $confirmpw){
             $this->error = true;
             array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' should equal with confirm password']);
+            return false;
         }
+        return true;
     }
 
     private function minlengthCheck($key, $value, $rule) {
@@ -71,14 +73,18 @@ class Validation {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $this->error = true;
             array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' is invalid email']);
+            return false;
         }
+        return true;
     }
 
     private function requiredCheck($key, $value){
         if( empty($value) ){
             $this->error = true;
             array_push($this->errorArr, ['value' => $value, 'key' => $key, 'message' => $key . ' is required']);
+            return true;
         }
+        return false;
     }
 
     public function getError(){
