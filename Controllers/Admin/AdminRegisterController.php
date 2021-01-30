@@ -49,6 +49,7 @@ class AdminRegisterController extends BaseController
 		
 		if($validate->hasError()){
 			Session::flash('errors', $validate->getError());
+			Session::flash('oldValues', $data);
 			header('location: ' . $this->baseurl . '/admin/register');
 			exit;
 		}
@@ -85,6 +86,7 @@ class AdminRegisterController extends BaseController
 		
 		if($validate->hasError()){
 			Session::flash('errors', $validate->getError());
+			Session::flash('oldValues', $data);
 			header('location: ' . $this->baseurl . '/admin/login');	
 			exit;		
 		}

@@ -18,19 +18,17 @@
 
 		<h2 class="english1 text-center mb-3">Register User</h2>
 
-		@php 
-			$oldValues = [];
+		@php
+			$oldValues = []
 		@endphp
+		
 		@if(\Sysgem\Session::has('errors'))
 			@php
 				$errors = \Sysgem\Session::getAndRemove('errors');				
+				$oldValues = \Sysgem\Session::getAndRemove('oldValues');
 			@endphp
 			@foreach($errors as $value)
-				<p>{{ $value['message'] }}</p>
-
-				@php
-					$oldValues[$value['key']] = $value['value'];
-				@endphp
+				<p>{{ $value['message'] }}</p>				
 			@endforeach			
 		@endif
 
