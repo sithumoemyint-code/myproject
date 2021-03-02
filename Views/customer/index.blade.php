@@ -7,7 +7,9 @@
 
 
 <div class="container mt-5">
-
+	@if(\Sysgem\Session::has('addcart-finish')) 
+		{{ \Sysgem\Session::flash('addcart-finish') }}
+	@endif 
 	<div class="sidebar">
 		<ul class="cats">
 			<li>
@@ -32,7 +34,7 @@
 						<a href="{{ $baseur }}/index/detail?id=<?php echo $products->id ?>">{{ $products->title }}</a>
 					</b>
 					<i>${{ $products->price }}</i>
-					<a href="#" class="add-to-cart">Add to Cart</a>
+					<a href="{{ $baseur }}/addcart?id=<?php echo $products->id; ?>" class="add-to-cart">Add to Cart</a>
 				</li>
 			@endforeach
 		</ul>

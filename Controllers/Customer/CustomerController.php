@@ -52,4 +52,56 @@ class CustomerController extends BaseController
 			'row' => $rows
 		]);
 	}
+
+	public function addcart($id)
+	{
+		if(!Session::has('cart')){
+
+			$arr = [$id];
+			Session::add('cart', $arr);
+			$qtyarr[$id] = 1;
+			Session::add('qtys', $qtyarr);
+
+		}else{
+
+			if( in_array($id, $_SESSION['cart']) ){
+				$_SESSION['qtys'][$id]++;
+			}else{
+				array_push($_SESSION['cart'], $id);
+				$_SESSION['qtys'][$id] = 1;
+			}			
+
+		}
+		Session::flash('addcart-finish', 'The item you selected has been successfully added to cart.');
+		header('location: ' . $this->baseurl . '/index');
+	}
+
+	public function checkout(){
+		echo "<pre>";
+		var_dump(Session::get('cart'));
+		echo "</pre>";
+
+		echo "<pre>";
+		var_dump(Session::get('qtys'));
+		echo "</pre>";
+
+		$cart = Session::get('cart');
+		$qtys = Session::get('qtys');
+
+		$finalArr = [];
+		foreach ($cart as $key => $prdid) {
+			echo $prdid; 
+			echo ' - ';
+			echo $qtys[$prdid];
+			echo '<br>';
+
+			$prd = $this->product->detail($prdid);
+			$prd['qty'] = $qtys[$prdid];
+			array_push($finalArr, $prd);
+		}
+
+		echo "<pre>";
+		var_dump($finalArr);
+
+	}
 }

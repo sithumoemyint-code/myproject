@@ -41,6 +41,20 @@ switch ($action) {
 		}
 		break;
 
+	case 'addcart': 
+		$id = $_GET['id'];
+		$customerController->addcart($id);
+		break;
+
+	case 'clear':
+		unset($_SESSION['cart']);
+		unset($_SESSION['qtys']);
+		header('location: index');
+		break;
+
+	case 'checkout':
+		$customerController->checkout();
+		break;
 
 	case 'admin':
 		if ($method == 'index') {

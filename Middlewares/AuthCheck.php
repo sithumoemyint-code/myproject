@@ -1,6 +1,6 @@
 <?php
 
-namespace Middleware;
+namespace Middlewares;
 
 use Sysgem\Session;
 
