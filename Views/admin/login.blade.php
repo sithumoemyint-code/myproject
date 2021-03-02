@@ -26,9 +26,10 @@
 
 		@if(\Sysgem\Session::has('errors'))
 			@foreach(\Sysgem\Session::getAndRemove('errors') as $value)
-				<p>{{ $value['message'] }}</p>
-			@endforeach			
+				<p class="text-danger">{{ $value['message'] }}</p>
+			@endforeach
 		@endif
+
 		
 		<form class="form" action="loginMember" method="post">
 			<div class="form-group">

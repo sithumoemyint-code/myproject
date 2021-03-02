@@ -49,19 +49,6 @@ class MemberModel extends BaseModel
 	}
 
 
-	// public function login($email, $password)
-	// {
-	// 	$sql = "SELECT * FROM member WHERE email='$email' AND password='$password'";
-	// 	$result = $this->mysqli->query($sql);
-
-	// 	if (mysqli_num_rows($result) == 1) {
-	// 		return true;
-	// 	}else {
-	// 		return false;
-	// 	}
-	// }
-
-
 	public function encodePass($pass)
 	{
 		$pass = md5($pass);

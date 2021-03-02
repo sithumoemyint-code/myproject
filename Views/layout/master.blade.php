@@ -15,5 +15,7 @@
 
 	<script src="<?php echo URL_ROOT . 'public/asset/js/jquery.js' ?>"></script>
 	<script src="<?php echo URL_ROOT . 'public/asset/js/bootstrap.bundle.min.js' ?>"></script>
+
+	@yield('script')
 </body>
 </html>

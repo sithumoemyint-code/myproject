@@ -26,7 +26,7 @@ class Session
 			return $val;
 		}else {
 			return null;
-		}	
+		}
 	}
 
 	public static function remove($key)

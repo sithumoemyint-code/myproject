@@ -15,44 +15,45 @@
 			{{\Sysgem\Session::flash('email_exist')}}
 		@endif
 
-
-		<h2 class="english1 text-center mb-3">Register User</h2>
-
-		@php
-			$oldValues = []
+		@php 
+			$oldValues = [];
 		@endphp
-		
+
+
 		@if(\Sysgem\Session::has('errors'))
-			@php
-				$errors = \Sysgem\Session::getAndRemove('errors');				
-				$oldValues = \Sysgem\Session::getAndRemove('oldValues');
-			@endphp
-			@foreach($errors as $value)
-				<p>{{ $value['message'] }}</p>				
-			@endforeach			
+			@foreach(\Sysgem\Session::getAndRemove('errors') as $value)
+				<p class="text-danger">{{ $value['message'] }}</p>
+
+				@php
+					$oldValues[$value['key']] = $value['value'];
+				@endphp
+			@endforeach
 		@endif
 
 
-		<form class="form" action="registerInsert" method="post">
+		<h2 class="english1 text-center mb-3">Register User</h2>
+
+		<form class="form" action="registerInsert" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="username">Username</label>
-				<input type="text" value="{{  isset($oldValues['username'])? $oldValues['username'] : '' }}" class="form-control rounded-0" name="username" id="username">
+				<input type="text" value="{{ isset($oldValues['username'])? $oldValues['username'] : '' }}" class="form-control rounded-0" name="username" id="username">
 			</div>
 
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input type="email" value="{{  isset($oldValues['email'])? $oldValues['email'] : '' }}" class="form-control rounded-0" name="email" id="email">
+				<input type="email" value="{{ isset($oldValues['email'])? $oldValues['email'] : '' }}" class="form-control rounded-0" name="email" id="email">
 			</div>
 
 			<div class="form-group">
 				<label for="password">Password</label>
-				<input type="password" value="{{  isset($oldValues['password'])? $oldValues['password'] : '' }}"class="form-control rounded-0" name="password" id="password">
+				<input type="password" value="{{ isset($oldValues['password'])? $oldValues['password'] : '' }}" class="form-control rounded-0" name="password" id="password">
 			</div>
 
 			<div class="form-group">
 				<label for="confirm_password">Confirm Password</label>
-				<input type="password" class="form-control rounded-0" name="confirm_password" id="confirm_password">
+				<input type="password" value="{{ isset($oldValues['confirm_password'])? $oldValues['confirm_password'] : '' }}" class="form-control rounded-0" name="confirm_password" id="confirm_password">
 			</div>
+			
 			<p></p>
 
 			<div class="row no-gutters justify-content-end">

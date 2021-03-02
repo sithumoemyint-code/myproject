@@ -1,16 +1,14 @@
 <?php
 
-namespace Middlewares;
+namespace Middleware;
 
 use Sysgem\Session;
 
 trait AuthCheck {
-    
-    public function checkLogin(){
+    public function checklogin(){
         if( Session::has('user_id') == false ){
-            header('location: '.$this->baseurl.'/admin/login');
+            header('location: ' . $this->baseurl . '/admin/login');
         }
         return $this;
     }
-
 }

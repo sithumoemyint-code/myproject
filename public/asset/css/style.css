@@ -30,7 +30,9 @@ body
 
 .navContainer
 {
-	background-color: #FFFFFF;
+	background-color: #ebebeb;
+	position: sticky;
+	top: 0;
 }
 
 .english
@@ -92,4 +94,20 @@ a.new
 .inner-new
 {
 	padding: 35px;
+}
+
+.tableCss
+{
+	margin-top: 20px;
+}
+
+.productIcon
+{
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.productDetail h5
+{
+	display: inline-block;
 }

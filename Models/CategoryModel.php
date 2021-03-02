@@ -20,7 +20,25 @@ class CategoryModel extends BaseModel
 		if ($this->mysqli->query($sql)) {
 			return true;
 		}else {
-			echo 'error';
+			echo 'error.';
+		}
+	}
+
+	public function edit($id)
+	{
+		$sql = "SELECT * FROM categories WHERE id = '$id'";
+		$result = $this->mysqli->query($sql);
+		$product = $result->fetch_assoc();
+		return $product;
+	}
+
+	public function update($id, $name, $remark)
+	{
+		$sql = "UPDATE categories SET name='$name', remark='$remark', updated_at = now() WHERE id = '$id'";
+		if ($this->mysqli->query($sql)) {
+			return true;
+		}else {
+			echo 'error.';
 		}
 	}
 

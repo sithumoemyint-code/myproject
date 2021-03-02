@@ -8,7 +8,14 @@
 <div class="container cat-list mt-5 mb-5">
 	<h1>New Category</h1>
 
+	
+
 	<div class="inner-new">
+		@if(\Sysgem\Session::has('errors'))
+			@foreach(\Sysgem\Session::getAndRemove('errors') as $value)
+				<p class="text-danger">{{ $value['message'] }}</p>
+			@endforeach
+		@endif
 		<form action="cat-add" method="post" autocomplete="off">
 
 			<label for="name">Category Name</label>

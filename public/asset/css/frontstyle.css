@@ -1,0 +1,133 @@
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	background: #fff;
+}
+
+.navContainer
+{
+	background-color: #adb5bd;
+	position: sticky;
+	top: 0;
+}
+
+.sidebar
+{
+	float: left;
+	width: 240px;
+	border: 1px solid #ddd;
+}
+
+.cats
+{
+	list-style: none;
+	padding: 0;
+}
+
+.cats li a
+{
+	display: block;
+	font-size: 15px;
+	padding: 8px 15px;
+	border-bottom: 1px solid #ddd;
+	text-decoration: none;
+}
+
+.cats li a:hover
+{
+	background: #efefef;
+}
+
+.main
+{
+	float: right;
+	width: 800px;
+	background: #fff;
+}
+
+.books 
+{
+	list-style: none;
+	margin: 10px;
+	padding: 0;
+	overflow: hidden;
+}
+
+.books li
+{
+	width: 190px;
+	text-align: center;
+	height: 240px;
+	float: left;
+	margin: 20px 35px;
+	font-size: 15px;
+}
+
+.books b
+{
+	display: block;
+	margin: 5px 0;
+	font-weight: normal;
+}
+
+.books b 
+{
+	display: block;
+	margin: 5px 0;
+	font-weight: normal;
+}
+
+.books i 
+{
+ 	color: #E74C3C;
+}
+
+a.add-to-cart 
+{
+	font-size: 13px;
+	display: block;
+	background: #1ABC9C;
+	color: #fff;
+	padding: 5px 0;
+	margin: 5px 30px;
+	text-decoration: none;
+} 
+
+h1 
+{
+	padding: 10px;
+	font-size: 21px;
+	background: #2C3E50;
+	margin: 0;
+	color: #fff;
+}
+
+.cat-list
+{
+	border: 3px solid #000;
+	padding: 0;
+	background: #f4f3ee;
+}
+
+.inner-list
+{
+	padding: 15px;
+}
+
+.productDetail h5
+{
+	display: inline-block;
+}
+
+a.new 
+{
+	display: block;
+	padding: 8px 0;
+	text-align: center;
+	width: 160px;
+	margin: 10px;
+	color: #fff;
+	background: #1ABC9C;
+	border: 1px solid #ccc;
+	text-decoration: none;
+}

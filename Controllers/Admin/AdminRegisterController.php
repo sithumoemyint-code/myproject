@@ -28,28 +28,30 @@ class AdminRegisterController extends BaseController
 
 
 	public function regInsert()
-	{		
+	{
 		$name = $_POST['username'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$confirm_password = $_POST['confirm_password'];
 
 		$data = [
-			'email' => $_POST['email'],
 			'username' => $_POST['username'],
-			'password' => $_POST['password'],			
+			'email' => $_POST['email'],
+			'password' => $_POST['password'],
+			'confirm_password' => $_POST['confirm_password']
 		];
 
 		$rules = [
-			'email' => 'required|email|email_exist=members',
-			'password' => 'required|minlength=6|confirm_password='.$_POST['confirm_password'],
-			'username' => 'required|minlength=6'
+			'username' => 'minlength=5',
+			'email' => 'minlength=5',
+			'password' => 'minlength=5',
+			'confirm_password' => 'minlength=5'
 		];
+
 		$validate = new Validation($rules, $data);
-		
-		if($validate->hasError()){
+
+		if ($validate->hasError()) {
 			Session::flash('errors', $validate->getError());
-			Session::flash('oldValues', $data);
 			header('location: ' . $this->baseurl . '/admin/register');
 			exit;
 		}
@@ -79,16 +81,16 @@ class AdminRegisterController extends BaseController
 		];
 
 		$rules = [
-			'email' => 'required|email',
-			'password' => 'required|minlength=6'
+			'email' => 'required',
+			'password' => 'required'
 		];
+
 		$validate = new Validation($rules, $data);
-		
-		if($validate->hasError()){
+
+		if ($validate->hasError()) {
 			Session::flash('errors', $validate->getError());
-			Session::flash('oldValues', $data);
-			header('location: ' . $this->baseurl . '/admin/login');	
-			exit;		
+			header('location: ' . $this->baseurl . '/admin/login');
+			exit;
 		}
 
 		$obj = $this->memberModel->getUserEmail($data['email']);
@@ -100,7 +102,7 @@ class AdminRegisterController extends BaseController
 			if ($hash_user_pass == $hash_pass) {
 				Session::add("user_id", $rowUser->id);
 				Session::add("user_name", $rowUser->name);
-				header('location: ' . $this->baseurl . '/admin');
+				header('location: ' . $this->baseurl . '/admin/index');
 			}else {
 				Session::flash("password_fail", "Wrong password. Please check your password.");
 				header('location: ' . $this->baseurl . '/admin/login');

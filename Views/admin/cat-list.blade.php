@@ -13,6 +13,7 @@
 			@foreach ($categories as $category)
 			<li title="{{$category['remark']}}">
 				[ <a href="{{ $baseur }}/admin/cat-del?id=<?php echo $category['id'] ?>">del</a> ]
+				[ <a href="{{ $baseur }}/admin/cat-edit?id=<?php echo $category['id'] ?>">edit</a> ]
 				{{$category['name']}}
 			</li>
 			@endforeach
