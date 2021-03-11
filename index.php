@@ -10,6 +10,7 @@ use Controllers\Admin\AdminPostController;
 use Controllers\Admin\AdminProductController;
 use Controllers\Customer\CustomerController;
 use Controllers\HomeController;
+use Controllers\Customer\OrderController;
 
 
 $adminHomeController = new AdminHomeController();
@@ -18,6 +19,7 @@ $homeController = new HomeController();
 $adminPostController = new AdminPostController();
 $adminProductController = new AdminProductController();
 $customerController = new CustomerController();
+$orderController = new OrderController();
 
 
 $action = isset($_GET['action'])? $_GET['action'] : '';
@@ -41,20 +43,30 @@ switch ($action) {
 		}
 		break;
 
-	case 'addcart': 
+	case 'addcart':
 		$id = $_GET['id'];
-		$customerController->addcart($id);
+		$customerController->addcart($id);	
 		break;
 
 	case 'clear':
-		unset($_SESSION['cart']);
-		unset($_SESSION['qtys']);
-		header('location: index');
+		$id = $_GET['id']; 
+		if (count($_SESSION['cart']) == 1) {
+			unset($_SESSION['cart']);
+			unset($_SESSION['qtys']);
+		}else {
+			unset($_SESSION['cart'][$id]);
+		}
+		header('location: checkout');
 		break;
 
 	case 'checkout':
-		$customerController->checkout();
+		$customerController->out()->checkout();
 		break;
+
+	case 'order':
+		$orderController->order();
+		break;
+
 
 	case 'admin':
 		if ($method == 'index') {

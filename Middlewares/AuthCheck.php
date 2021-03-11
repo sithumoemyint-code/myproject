@@ -11,4 +11,12 @@ trait AuthCheck {
         }
         return $this;
     }
+
+    public function out()
+    {
+    	if (Session::has('cart') == false) {
+    		header('location: ' . $this->baseurl . '/index');
+    	}
+    	return $this;
+    }
 }
